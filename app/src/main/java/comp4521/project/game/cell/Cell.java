@@ -1,7 +1,9 @@
 package comp4521.project.game.cell;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Cell {
-    private int value = 0;
+    private final int value;
     private boolean locked = false;
     public Cell(int value) {
         this.value = value;
@@ -18,5 +20,14 @@ public class Cell {
     }
     public void unlock() {
         locked = false;
+    }
+    @NotNull
+    public static Cell collide(@NotNull Cell cell, @NotNull Cell other) {
+        assert cell.value == other.value;
+        assert !cell.isLocked();
+        assert !other.isLocked();
+        Cell newCell = new Cell(cell.value + other.value);
+        newCell.lock();
+        return newCell;
     }
 }

@@ -3,6 +3,7 @@ package comp4521.project.game.action;
 import org.jetbrains.annotations.NotNull;
 
 import comp4521.project.game.map.Position;
+import comp4521.project.utils.ShouldNotReachException;
 
 public enum Action {
     UP, DOWN, LEFT, RIGHT;
@@ -17,7 +18,7 @@ public enum Action {
             case RIGHT:
                 return new Position(position.row(), position.col() + 1);
             default:
-                throw new RuntimeException();
+                throw new ShouldNotReachException();
         }
     }
 }

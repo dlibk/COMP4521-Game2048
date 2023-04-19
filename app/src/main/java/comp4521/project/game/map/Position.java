@@ -19,6 +19,11 @@ public class Position {
         return false;
     }
 
+    @Override
+    public int hashCode() {
+        return 17 + 31 * row + col;
+    }
+
     public int row() {
         return row;
     }
