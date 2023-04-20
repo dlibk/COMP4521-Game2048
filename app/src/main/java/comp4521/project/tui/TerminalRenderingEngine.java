@@ -27,7 +27,7 @@ public class TerminalRenderingEngine implements RenderingEngine {
         final var builder = new StringBuilder();
         for (int y = 0; y < map.getLength(); y++) {
             for (int x = 0; x < map.getLength(); x++) {
-                final var cell = map.getCell(new Position(y, x));
+                final var cell = map.getCell(Position.of(y, x));
                 if (cell == null) {
                     builder.append('.');
                 } else {

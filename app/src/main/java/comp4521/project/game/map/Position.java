@@ -1,11 +1,27 @@
 package comp4521.project.game.map;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Position {
 
     private final int row;
     private final int col;
+    public static final int MAX_MAP_LENGTH = 6;
 
-    public Position(int row, int col) {
+    private static final Position[][] cache =
+            new Position[Position.MAX_MAP_LENGTH + 2][Position.MAX_MAP_LENGTH + 2];
+
+    @NotNull
+    public static Position of(int row, int col) {
+        int x = row + 1;
+        int y = col + 1;
+        if (cache[x][y] == null) {
+            cache[x][y] = new Position(row, col);
+        }
+        return cache[x][y];
+    }
+
+    private Position(int row, int col) {
         this.row = row;
         this.col = col;
     }

@@ -10,13 +10,13 @@ public enum Action {
     public Position getNextPosition(@NotNull Position position) {
         switch (this) {
             case UP:
-                return new Position(position.row() - 1, position.col());
+                return Position.of(position.row() - 1, position.col());
             case DOWN:
-                return new Position(position.row() + 1, position.col());
+                return Position.of(position.row() + 1, position.col());
             case LEFT:
-                return new Position(position.row(), position.col() - 1);
+                return Position.of(position.row(), position.col() - 1);
             case RIGHT:
-                return new Position(position.row(), position.col() + 1);
+                return Position.of(position.row(), position.col() + 1);
             default:
                 throw new ShouldNotReachException();
         }

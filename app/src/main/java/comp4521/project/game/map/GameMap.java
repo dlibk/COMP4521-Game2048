@@ -25,7 +25,7 @@ public class GameMap {
         List<Position> temp = new ArrayList<>();
         for (int row = 0; row < length; row++) {
             for (int col = 0; col < length; col++) {
-                temp.add(new Position(row, col));
+                temp.add(Position.of(row, col));
             }
         }
         positions = Collections.unmodifiableList(temp);
@@ -93,6 +93,7 @@ public class GameMap {
         return null;
     }
 
+    @NotNull
     public ActionResult processAction(Action action, Consumer<Move> onMove, Consumer<Cell> onCollide) {
         boolean succeed = false;
         List<Position> positions1 = new ArrayList<>(this.positions);
@@ -147,5 +148,10 @@ public class GameMap {
 
     public List<Position> getEmptyPositions() {
         return positions.stream().filter(x -> getCell(x) == null).collect(Collectors.toList());
+    }
+
+    @NotNull
+    public Cell[][] getMap() {
+        return cells;
     }
 }
