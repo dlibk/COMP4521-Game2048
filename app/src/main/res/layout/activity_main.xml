@@ -4,4 +4,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"/>
+    android:background="#B8ACCC"
+    tools:context=".MainActivity">
+
+    <comp4521.project.GameView
+        android:id="@+id/gameView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        android:alignmentMode="alignBounds"
+        android:background="#523C7A"
+        android:columnCount="4"
+        android:orientation="horizontal"
+        android:rowCount="4"
+        android:useDefaultMargins="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.728">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card00"
+            android:layout_width="103.5dp"
+            android:layout_height="103.5dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="fill"
+            app:cardBackgroundColor="#4EC980"
+            app:cardCornerRadius="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:gravity="center"
+                android:text="@string/_2048"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold">
+
+            </TextView>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card01"
+            android:layout_width="103.5dp"
+            android:layout_height="0dp"
+            android:layout_gravity="fill"
+            android:layout_column="1"
+            android:layout_row="0"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="#4EC9B0"
+            app:cardCornerRadius="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/_2048"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold">
+
+            </TextView>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card10"
+            android:layout_width="0dp"
+            android:layout_height="103.5dp"
+            android:layout_gravity="fill"
+            android:layout_column="0"
+            android:layout_row="1"
+            app:cardBackgroundColor="#20ffffff"
+            app:cardElevation="10dp"
+            android:alpha="0.99"
+            app:cardCornerRadius="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:visibility="gone">
+
+            </TextView>
+        </androidx.cardview.widget.CardView>
+    </comp4521.project.GameView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
