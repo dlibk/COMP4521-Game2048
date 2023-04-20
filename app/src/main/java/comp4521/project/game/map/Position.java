@@ -12,9 +12,11 @@ public class Position {
             new Position[Position.MAX_MAP_LENGTH + 2][Position.MAX_MAP_LENGTH + 2];
 
     @NotNull
-    public static Position of(int row, int col) {
+    public static Position of(int row, int col) throws AssertionError {
         int x = row + 1;
         int y = col + 1;
+        assert x >= 0 && x < MAX_MAP_LENGTH + 2;
+        assert y >= 0 && y < MAX_MAP_LENGTH + 2;
         if (cache[x][y] == null) {
             cache[x][y] = new Position(row, col);
         }
