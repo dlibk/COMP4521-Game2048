@@ -18,8 +18,8 @@ public class GameFactory {
                 GameMap gameMap = new GameMap(length);
                 Position first = gameMap.getAllPositions().get((int) (Math.random() * length * length));
                 Position second = gameMap.getEmptyPositions().get((int) (Math.random() * (length * length - 1)));
-                gameMap.placeCell(first, new Cell(Math.random() < 0.6 ? 2 : 4));
-                gameMap.placeCell(second, new Cell(Math.random() < 0.6 ? 2 : 4));
+//                gameMap.placeCell(first, new Cell(Math.random() < 0.6 ? 2 : 4));
+//                gameMap.placeCell(second, new Cell(Math.random() < 0.6 ? 2 : 4));
                 return new TerminalGame(gameMap);
             default:
                 throw new ShouldNotReachException();

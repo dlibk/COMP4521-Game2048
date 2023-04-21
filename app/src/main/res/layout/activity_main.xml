@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.728">
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card00"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -35,7 +35,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:alpha="0.99"
-            app:cardBackgroundColor="#4EC980"
+            app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="5dp">
 
@@ -45,18 +45,19 @@
                 android:layout_row="0"
                 android:layout_column="0"
                 android:gravity="center"
-                android:text="@string/_2048"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
-                android:textStyle="bold">
+                android:textSize="45sp"
+                android:textStyle="bold"
+                android:visibility="gone">
 
             </TextView>
 
 
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card01"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -66,7 +67,7 @@
             android:alpha="0.99"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            app:cardBackgroundColor="#4EC9B0"
+            app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="5dp">
 
@@ -74,25 +75,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/_2048"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
-                android:textStyle="bold">
+                android:textSize="45sp"
+                android:textStyle="bold"
+                android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card02"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
+            android:layout_rowWeight="1"
             android:layout_column="2"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -104,14 +106,14 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="45sp"
                 android:textStyle="bold"
                 android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card03"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -132,14 +134,14 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="45sp"
                 android:textStyle="bold"
                 android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card10"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -160,14 +162,14 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="45sp"
                 android:textStyle="bold"
                 android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
         android:id="@+id/card11"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -188,14 +190,14 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="45sp"
                 android:textStyle="bold"
                 android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card12"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -216,14 +218,14 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="45sp"
                 android:textStyle="bold"
                 android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card13"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -244,14 +246,14 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="45sp"
                 android:textStyle="bold"
                 android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card20"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -272,14 +274,14 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="45sp"
                 android:textStyle="bold"
                 android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card21"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -300,14 +302,14 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="45sp"
                 android:textStyle="bold"
                 android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card22"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -328,14 +330,14 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="45sp"
                 android:textStyle="bold"
                 android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card23"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -356,14 +358,14 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="45sp"
                 android:textStyle="bold"
                 android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card30"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -384,14 +386,14 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="45sp"
                 android:textStyle="bold"
                 android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card31"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -412,14 +414,14 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="45sp"
                 android:textStyle="bold"
                 android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card32"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -440,14 +442,14 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="45sp"
                 android:textStyle="bold"
                 android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
 
-        <androidx.cardview.widget.CardView
+        <comp4521.project.Card
             android:id="@+id/card33"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -462,18 +464,19 @@
             app:cardElevation="10dp">
 
             <TextView
+                android:id="@+id/txt33"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="45sp"
                 android:textStyle="bold"
                 android:visibility="gone">
 
             </TextView>
-        </androidx.cardview.widget.CardView>
+        </comp4521.project.Card>
     </comp4521.project.GameView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,4 +12,12 @@
     <color name="gray_400">#FFBDBDBD</color>
     <color name="gray_600">#FF757575</color>
     <color name="semitransparent">#20FFFFFF</color>
+    <color name="_0">#36501F</color>
+    <color name="_2">#50E5F8</color>
+    <color name="_4">#8BF72D</color>
+    <color name="_8">#BD770F</color>
+    <color name="_16">#B81AD5</color>
+    <color name="_32">#DE216B</color>
+    <color name="_64">#3763D5</color>
+    <color name="_default">#E1610E</color>
 </resources>

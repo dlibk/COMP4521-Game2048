@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import comp4521.project.game.action.*;
 import comp4521.project.game.cell.*;
+import comp4521.project.utils.GameShouldStopException;
 import comp4521.project.utils.ShouldNotReachException;
 
 public class GameMap {
@@ -46,7 +46,14 @@ public class GameMap {
         return cells[position.row()][position.col()];
     }
 
-    public void placeCell(@NotNull Position position, Cell cell) {
+    public Cell getCell(int row, int col) {
+        if (!isPositionInMap(Position.of(row, col))) {
+            throw new IllegalArgumentException("position not in map");
+        }
+        return cells[row][col];
+    }
+
+    private void placeCell(@NotNull Position position, Cell cell) {
         if (!isPositionInMap(position)) {
             throw new IllegalArgumentException("position not in map");
         }
@@ -55,6 +62,9 @@ public class GameMap {
 
     public void generateCell(@NotNull Supplier<Integer> value) {
         List<Position> emptyPositions = getEmptyPositions();
+        if (emptyPositions.isEmpty()) {
+            throw new GameShouldStopException();
+        }
         placeCell(emptyPositions.get(new Random().nextInt(emptyPositions.size())), new Cell(value.get()));
     }
 
@@ -72,7 +82,7 @@ public class GameMap {
 
     private Move getMove(@NotNull Position position, @NotNull Action action) {
         Cell cell = getCell(position);
-        if (cell == null) {
+        if (cell == null || action == Action.NULL) {
             return null;
         }
         Position target = position;
@@ -94,7 +104,10 @@ public class GameMap {
     }
 
     @NotNull
-    public ActionResult processAction(Action action, Consumer<Move> onMove, Consumer<Cell> onCollide) {
+    public ActionResult processAction(Action action) {
+        if (action == Action.NULL) {
+            return new ActionResult.Failed(action, "No valid movement performed");
+        }
         boolean succeed = false;
         List<Position> positions1 = new ArrayList<>(this.positions);
 
@@ -121,12 +134,10 @@ public class GameMap {
             Move move = getMove(p, action);
             if (move != null) {
                 succeed = true;
-                onMove.accept(move);
                 Cell newCell = getCell(move.getEnd());
                 moveCell(move);
                 assert getCell(move.getStart()) == null;
                 if (newCell != null) {
-                    onCollide.accept(newCell);
                     newCell.lock();
                 }
             }

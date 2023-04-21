@@ -45,7 +45,7 @@ public class TerminalGame implements Game {
         while (!shouldStop()) {
             renderingEngine.render(gameMap);
             Action action = inputEngine.fetchAction();
-            ActionResult actionResult = gameMap.processAction(action, x -> {}, x -> {});
+            ActionResult actionResult = gameMap.processAction(action);
             if (actionResult instanceof ActionResult.Success)
                 gameMap.generateCell(() -> Math.random() < 0.6 ? 2 : 4);
         }

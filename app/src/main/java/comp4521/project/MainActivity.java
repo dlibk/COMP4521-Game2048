@@ -1,11 +1,8 @@
 package comp4521.project;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
-import android.view.WindowManager;
-import android.view.WindowMetrics;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,6 +11,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         GameView gameView = findViewById(R.id.gameView);
-        CardView card00 = findViewById(R.id.card00);
+        for (int i = 0; i < gameView.getChildCount(); i++) {
+            if (gameView.getChildAt(i) instanceof Card) {
+                Card card = (Card) gameView.getChildAt(i);
+                gameView.addCard(card);
+                card.initialize();
+            }
+        }
+        gameView.refreshGame();
     }
 }
