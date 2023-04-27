@@ -6,22 +6,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridLayout;
 
-import androidx.annotation.NonNull;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
-import comp4521.project.game.action.Action;
-import comp4521.project.game.mode.Mode;
 import comp4521.project.utils.GameShouldStopException;
 
 public class GameView extends GridLayout {
-
-    public final List<Card> cards = new ArrayList<>();
-
-    public final Game game = GameFactory.createGame(Mode.CLASSIC, 4);
 
     public GameView(Context context) {
         super(context);
@@ -71,7 +58,7 @@ public class GameView extends GridLayout {
                         } finally {
                             if (action != null)
                                 try {
-                                    game.pushAction(action);
+//                                    game.pushAction(action);
                                 } catch (GameShouldStopException ignored) {
                                     gameStop();
                                 }
@@ -83,29 +70,13 @@ public class GameView extends GridLayout {
                 return true;
             }
         });
-
-        game.setOnMapUpdate((gameMap) -> {
-            List<Integer> values = game.getFlattenMap();
-            for (int i = 0; i < values.size(); i++) {
-                if (values.get(i) < 0) {
-                    cards.get(i).setInvisible();
-                } else {
-                    cards.get(i).setValue(values.get(i));
-                }
-            }
-        });
-    }
-
-    public void addCard(@NonNull Card card) {
-        cards.add(card);
     }
 
     private void gameStop() {
-        setOnTouchListener(null);
+        setOnTouchListener((view, event) -> {
+            view.performClick();
+            return false;
+        });
         throw new RuntimeException("Game Stopped!");
-    }
-
-    public void refreshGame() {
-        game.updateMap();
     }
 }

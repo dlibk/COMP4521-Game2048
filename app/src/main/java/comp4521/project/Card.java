@@ -2,6 +2,8 @@ package comp4521.project;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,12 @@ public class Card extends CardView {
 
     public static final Map<Integer, Integer> colorSource = new HashMap<>();
 
+    public static final Animation synthesisAnimation = new ScaleAnimation(1.1f, 1.1f, 1.1f, 1.1f,
+            Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+
+    public static final Animation generateAnimation = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f,
+            Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+
     static {
         colorSource.put(0, R.color._0);
         colorSource.put(2, R.color._2);
@@ -24,6 +32,9 @@ public class Card extends CardView {
         colorSource.put(16, R.color._16);
         colorSource.put(32, R.color._32);
         colorSource.put(64, R.color._64);
+
+        synthesisAnimation.setDuration(300);
+        generateAnimation.setDuration(300);
     }
 
 
@@ -52,7 +63,6 @@ public class Card extends CardView {
 
     public void setValue(int value) {
         if (value >= 0) {
-            textView.setVisibility(VISIBLE);
             textView.setText(String.valueOf(value));
 
             if (value >= 1000) {
@@ -62,8 +72,10 @@ public class Card extends CardView {
             } else {
                 textView.setTextSize(45);
             }
-
             setCardBackgroundColor(getColorFromResource(value));
+            textView.setVisibility(VISIBLE);
+        } else {
+            setInvisible();
         }
     }
 
