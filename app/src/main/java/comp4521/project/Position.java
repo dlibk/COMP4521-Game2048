@@ -1,6 +1,6 @@
-package comp4521.project.game.map;
+package comp4521.project;
 
-import org.jetbrains.annotations.NotNull;
+import androidx.annotation.NonNull;
 
 public class Position {
 
@@ -9,18 +9,17 @@ public class Position {
     public static final int MAX_MAP_LENGTH = 6;
 
     private static final Position[][] cache =
-            new Position[Position.MAX_MAP_LENGTH + 2][Position.MAX_MAP_LENGTH + 2];
+            new Position[MAX_MAP_LENGTH][MAX_MAP_LENGTH];
 
-    @NotNull
+    @NonNull
     public static Position of(int row, int col) throws AssertionError {
-        int x = row + 1;
-        int y = col + 1;
-        assert x >= 0 && x < MAX_MAP_LENGTH + 2;
-        assert y >= 0 && y < MAX_MAP_LENGTH + 2;
-        if (cache[x][y] == null) {
-            cache[x][y] = new Position(row, col);
+        if (row >= 0 && row < MAX_MAP_LENGTH && col >= 0 && col < MAX_MAP_LENGTH) {
+            if (cache[row][col] == null)
+                cache[row][col] = new Position(row, col);
+            return cache[row][col];
+        } else {
+            return new Position(row, col);
         }
-        return cache[x][y];
     }
 
     private Position(int row, int col) {
@@ -40,6 +39,12 @@ public class Position {
     @Override
     public int hashCode() {
         return 17 + 31 * row + col;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Position(" + row + ", " + col + ")";
     }
 
     public int row() {

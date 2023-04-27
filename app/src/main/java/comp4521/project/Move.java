@@ -1,22 +1,21 @@
-package comp4521.project.game.map;
+package comp4521.project;
 
-import org.jetbrains.annotations.NotNull;
+import androidx.annotation.NonNull;
 
 public class Move {
     private final Position start;
     private final Position end;
     private Move(Position start, Position end) {
-
         this.start = start;
         this.end = end;
     }
 
-    @NotNull
+    @NonNull
     public Position getStart() {
         return start;
     }
 
-    @NotNull
+    @NonNull
     public Position getEnd() {
         return end;
     }
@@ -30,7 +29,7 @@ public class Move {
         return false;
     }
 
-    public static Move of(@NotNull Position start, @NotNull Position end) {
+    public static Move of(@NonNull Position start, @NonNull Position end) {
         if (start.equals(end)) {
             return null;
         }

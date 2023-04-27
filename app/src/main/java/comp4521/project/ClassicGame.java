@@ -4,24 +4,31 @@ import androidx.annotation.NonNull;
 
 import java.util.function.Supplier;
 
-import comp4521.project.game.action.Action;
-import comp4521.project.game.action.ActionResult;
-import comp4521.project.game.map.GameMap;
 import comp4521.project.utils.GameShouldStopException;
 
 public class ClassicGame extends Game {
-    public ClassicGame(@NonNull GameMap map, @NonNull Supplier<Integer> generator) {
-        super(map, generator);
-    }
 
+    public ClassicGame(int length, Supplier<Integer> generator) {
+        super(length, generator);
+    }
     @Override
     public void pushAction(@NonNull Action action) throws GameShouldStopException {
         synchronized (gameMap) {
-            ActionResult actionResult = gameMap.processAction(action);
-            if (actionResult instanceof ActionResult.Success) {
+            if (gameMap.processAction(action))
                 gameMap.generateCell(generator);
-                onMapUpdate.accept(gameMap);
-            }
+            if (shouldStop())
+                throw new GameShouldStopException();
         }
+    }
+
+    public boolean shouldStop() {
+        if (!gameMap.getEmptyPositions().isEmpty())
+            return false;
+
+        for (Position p: gameMap.getAllPositions()) {
+            if (gameMap.isMovable(p))
+                return false;
+        }
+        return true;
     }
 }
