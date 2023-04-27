@@ -1,5 +1,6 @@
 package comp4521.project;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -9,6 +10,8 @@ import android.widget.GridLayout;
 import comp4521.project.utils.GameShouldStopException;
 
 public class GameView extends GridLayout {
+
+    Game game = Game.createGame(Mode.CLASSIC, 4);
 
     public GameView(Context context) {
         super(context);
@@ -58,7 +61,7 @@ public class GameView extends GridLayout {
                         } finally {
                             if (action != null)
                                 try {
-//                                    game.pushAction(action);
+                                    game.pushAction(action);
                                 } catch (GameShouldStopException ignored) {
                                     gameStop();
                                 }
@@ -73,10 +76,11 @@ public class GameView extends GridLayout {
     }
 
     private void gameStop() {
-        setOnTouchListener((view, event) -> {
-            view.performClick();
-            return false;
-        });
-        throw new RuntimeException("Game Stopped!");
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Game 2048")
+                .setMessage("Game End")
+                .setPositiveButton("Restart Game", (dialog, which) -> game.initialize())
+                .setNegativeButton("Back to Menu (Not implemented)", (dialog, which) -> {});
+        builder.create().show();
     }
 }

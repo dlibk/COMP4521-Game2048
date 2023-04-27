@@ -18,7 +18,7 @@ public class Card extends CardView {
 
     public static final Map<Integer, Integer> colorSource = new HashMap<>();
 
-    public static final Animation synthesisAnimation = new ScaleAnimation(1.1f, 1.1f, 1.1f, 1.1f,
+    public static final Animation synthesisAnimation = new ScaleAnimation(0.9f, 1.1f, 0.9f, 1.1f,
             Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 
     public static final Animation generateAnimation = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f,
@@ -33,8 +33,8 @@ public class Card extends CardView {
         colorSource.put(32, R.color._32);
         colorSource.put(64, R.color._64);
 
-        synthesisAnimation.setDuration(300);
-        generateAnimation.setDuration(300);
+        synthesisAnimation.setDuration(150);
+        generateAnimation.setDuration(150);
     }
 
 

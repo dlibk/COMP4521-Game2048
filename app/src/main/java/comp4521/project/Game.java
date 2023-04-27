@@ -2,11 +2,12 @@ package comp4521.project;
 
 import androidx.annotation.NonNull;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
-import comp4521.project.utils.GameShouldStopException;
-import comp4521.project.utils.ShouldNotReachException;
+import comp4521.project.utils.*;
 
 public abstract class Game {
     public static final Supplier<Integer> classicSeed = () -> Math.random() < 0.6 ? 2 : 4;
@@ -20,8 +21,17 @@ public abstract class Game {
     }
 
     public void initialize() {
-        gameMap.generateCell(generator);
-        gameMap.generateCell(generator);
+        synchronized (gameMap) {
+            gameMap.initialize();
+            gameMap.generateCell(generator);
+            gameMap.generateCell(generator);
+        }
+    }
+
+    public List<Cell> getCellList() {
+        return gameMap.getAllPositions().stream()
+                .map(gameMap::getCell)
+                .collect(Collectors.toList());
     }
 
     public abstract void pushAction(@NonNull Action action);
@@ -38,6 +48,7 @@ public abstract class Game {
         }
     }
 
+    @Deprecated
     public void render() {
         for (int row = 0; row < gameMap.getLength(); row++) {
             for (int col = 0; col < gameMap.getLength(); col++) {

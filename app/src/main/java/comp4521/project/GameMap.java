@@ -46,7 +46,7 @@ public class GameMap {
 
         var position = emptyPositions.get((int) (Math.random() * emptyPositions.size()));
         placeCell(position, generator.get());
-//        getCell(position).startAnimation(Card.generateAnimation);
+        getCell(position).startAnimation(Card.generateAnimation);
     }
 
     public boolean processAction(@NonNull Action action) {
@@ -122,7 +122,7 @@ public class GameMap {
             placeCell(move.getEnd(), value);
         } else {
             placeCell(move.getEnd(), value + target.getValue());
-//            target.startAnimation(Card.synthesisAnimation);
+            target.startAnimation(Card.synthesisAnimation);
             target.lock();
         }
     }
@@ -156,5 +156,11 @@ public class GameMap {
 
     public int getLength() {
         return length;
+    }
+
+    public void initialize() {
+        for (Position p: allPositions) {
+            getCell(p).setValue(-1);
+        }
     }
 }
