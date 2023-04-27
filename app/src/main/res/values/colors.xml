@@ -20,4 +20,6 @@
     <color name="_32">#DE216B</color>
     <color name="_64">#3763D5</color>
     <color name="_default">#E1610E</color>
+    <color name="orange">#FF9800</color>
+    <color name="lightyellow">#FFEB3B</color>
 </resources>

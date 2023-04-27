@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B8ACCC"
+    android:background="#523C7A"
     tools:context=".MainActivity">
 
     <comp4521.project.GameView
@@ -30,10 +30,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
-            android:layout_column="0"
-            android:layout_gravity="fill"
             android:layout_rowWeight="1"
+            android:layout_column="0"
             android:layout_columnWeight="1"
+            android:layout_gravity="fill"
             android:alpha="0.99"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
@@ -62,11 +62,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
+            android:layout_rowWeight="1"
             android:layout_column="1"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="5dp">
@@ -118,11 +118,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
+            android:layout_rowWeight="1"
             android:layout_column="3"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -146,11 +146,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="1"
+            android:layout_rowWeight="1"
             android:layout_column="0"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -170,18 +170,18 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-        android:id="@+id/card11"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_row="1"
-        android:layout_column="1"
-        android:layout_gravity="fill"
-        android:alpha="0.99"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-        app:cardBackgroundColor="@color/semitransparent"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp">
+            android:id="@+id/card11"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:alpha="0.99"
+            app:cardBackgroundColor="@color/semitransparent"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -202,11 +202,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="1"
+            android:layout_rowWeight="1"
             android:layout_column="2"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -230,11 +230,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="1"
+            android:layout_rowWeight="1"
             android:layout_column="3"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -258,11 +258,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="2"
+            android:layout_rowWeight="1"
             android:layout_column="0"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -286,11 +286,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="2"
+            android:layout_rowWeight="1"
             android:layout_column="1"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -314,11 +314,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="2"
+            android:layout_rowWeight="1"
             android:layout_column="2"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -342,11 +342,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="2"
+            android:layout_rowWeight="1"
             android:layout_column="3"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -370,11 +370,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="3"
+            android:layout_rowWeight="1"
             android:layout_column="0"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -398,11 +398,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="3"
+            android:layout_rowWeight="1"
             android:layout_column="1"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -426,11 +426,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="3"
+            android:layout_rowWeight="1"
             android:layout_column="2"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -454,11 +454,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="3"
+            android:layout_rowWeight="1"
             android:layout_column="3"
+            android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -478,5 +478,137 @@
             </TextView>
         </comp4521.project.Card>
     </comp4521.project.GameView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBaseline_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gameView">
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/orange"
+            android:gravity="center"
+            android:text="@string/reset"
+            android:onClick="reset">
+
+        </Button>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="5dp"
+            android:layout_weight="1.5"
+            android:text=""
+            android:visibility="invisible">
+
+        </TextView>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/light_blue_400"
+            android:gravity="center"
+            android:text="@string/menu">
+
+        </Button>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBaseline_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/gameView"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="30dp"
+            app:cardBackgroundColor="@color/_default"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="5dp"
+            app:layout_constraintDimensionRatio="h,1:1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="35sp"
+                android:textColor="@color/white"
+                android:text="@string/_2048">
+            </TextView>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="30dp"
+            android:layout_gravity="center"
+            android:visibility="invisible">
+
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="30dp"
+            android:layout_weight="1"
+            android:background="@color/lightyellow"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/score"
+                android:textStyle="bold"
+                android:textSize="35sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/scoreboard"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/_0"
+                android:textStyle="bold"
+                android:textSize="30sp">
+            </TextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

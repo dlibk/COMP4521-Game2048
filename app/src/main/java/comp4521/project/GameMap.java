@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -49,8 +50,8 @@ public class GameMap {
         getCell(position).startAnimation(Card.generateAnimation);
     }
 
-    public boolean processAction(@NonNull Action action) {
-        boolean succeed = false;
+    public int processAction(@NonNull Action action) {
+        int score = -1;
         List<Position> positions = new ArrayList<>(this.allPositions);
 
         positions.sort((position, t1) -> {
@@ -75,8 +76,9 @@ public class GameMap {
         for (Position p: positions) {
             Move move = getMove(p, action);
             if (move != null) {
-                succeed = true;
-                moveCell(move);
+                if (score < 0)
+                    score = 0;
+                score += moveCell(move);
                 assert getCell(move.getStart()).isEmpty();
             }
         }
@@ -85,7 +87,7 @@ public class GameMap {
             getCell(p).unlock();
         }
 
-        return succeed;
+        return score;
     }
 
     @Nullable
@@ -112,7 +114,7 @@ public class GameMap {
         return null;
     }
 
-    private void moveCell(@NonNull Move move) {
+    private int moveCell(@NonNull Move move) {
         Cell cell = getCell(move.getStart());
         var value = cell.getValue();
         assert !(cell.isEmpty() || cell.isLocked());
@@ -120,10 +122,13 @@ public class GameMap {
         placeCell(move.getStart(), -1);
         if (target.isEmpty()) {
             placeCell(move.getEnd(), value);
+            return 0;
         } else {
-            placeCell(move.getEnd(), value + target.getValue());
+            value += target.getValue();
+            placeCell(move.getEnd(), value);
             target.startAnimation(Card.synthesisAnimation);
             target.lock();
+            return value;
         }
     }
 

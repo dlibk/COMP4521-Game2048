@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,7 @@ public abstract class Game {
                 .collect(Collectors.toList());
     }
 
-    public abstract void pushAction(@NonNull Action action);
+    public abstract void pushAction(@NonNull Action action, Consumer<Integer> updateScore);
 
     @NonNull
     public static Game createGame(@NonNull Mode mode, int length) {
@@ -75,16 +76,16 @@ public abstract class Game {
                     case "exit":
                         return;
                     case "w":
-                        game.pushAction(Action.UP);
+                        game.pushAction(Action.UP, (score) -> {});
                         break;
                     case "a":
-                        game.pushAction(Action.LEFT);
+                        game.pushAction(Action.LEFT, (score) -> {});
                         break;
                     case "s":
-                        game.pushAction(Action.DOWN);
+                        game.pushAction(Action.DOWN, (score) -> {});
                         break;
                     case "d":
-                        game.pushAction(Action.RIGHT);
+                        game.pushAction(Action.RIGHT, (score) -> {});
                         break;
                 }
                 game.render();

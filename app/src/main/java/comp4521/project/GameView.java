@@ -5,13 +5,19 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.GridLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import comp4521.project.utils.GameShouldStopException;
 
 public class GameView extends GridLayout {
 
-    Game game = Game.createGame(Mode.CLASSIC, 4);
+    Game game = Game.createGame(Mode.ZERO, 4);
+    TextView scoreboard;
 
     public GameView(Context context) {
         super(context);
@@ -61,7 +67,22 @@ public class GameView extends GridLayout {
                         } finally {
                             if (action != null)
                                 try {
-                                    game.pushAction(action);
+                                    game.pushAction(action, score -> {
+                                        var sum = score + Integer.parseInt(scoreboard.getText().toString());
+                                        if (sum > 999999)
+                                            sum = 999999;
+                                        else if (sum > 99999)
+                                            scoreboard.setTextSize(20);
+                                        else if (sum > 9999)
+                                            scoreboard.setTextSize(25);
+                                        scoreboard.setText(String.valueOf(sum));
+                                        if (score > 0)
+                                            scoreboard.startAnimation(new ScaleAnimation(
+                                                0.8f, 1.2f, 0.8f, 1.2f,
+                                                Animation.RELATIVE_TO_SELF, 0.5f,
+                                                Animation.RELATIVE_TO_SELF, 0.5f
+                                            ));
+                                    });
                                 } catch (GameShouldStopException ignored) {
                                     gameStop();
                                 }
@@ -78,9 +99,21 @@ public class GameView extends GridLayout {
     private void gameStop() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Game 2048")
-                .setMessage("Game End")
-                .setPositiveButton("Restart Game", (dialog, which) -> game.initialize())
+                .setMessage("Game End.\nYour score is " + scoreboard.getText())
+                .setPositiveButton("Restart Game", (dialog, which) -> {
+                    game.initialize();
+                    clearScoreBoard();
+                })
                 .setNegativeButton("Back to Menu (Not implemented)", (dialog, which) -> {});
         builder.create().show();
+    }
+
+    public void setScoreboard(@NonNull TextView scoreboard) {
+        this.scoreboard = scoreboard;
+    }
+
+    public void clearScoreBoard() {
+        if (scoreboard != null)
+            scoreboard.setText("0");
     }
 }

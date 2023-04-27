@@ -1,6 +1,8 @@
 package comp4521.project;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
             card.initialize();
             cellList.get(i).bindCard(card);
         }
+        gameView.setScoreboard((TextView) findViewById(R.id.scoreboard));
         getGame().initialize();
     }
 
@@ -24,5 +27,8 @@ public class MainActivity extends AppCompatActivity {
         return gameView.game;
     }
 
-
+    public void reset(View v) {
+        getGame().initialize();
+        gameView.clearScoreBoard();
+    }
 }
