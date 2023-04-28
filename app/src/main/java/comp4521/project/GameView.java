@@ -1,5 +1,6 @@
 package comp4521.project;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -12,11 +13,20 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import java.util.EventListener;
+import java.util.function.Consumer;
+
 import comp4521.project.utils.GameShouldStopException;
 
 public class GameView extends GridLayout {
 
-    Game game = Game.createGame(Mode.CLASSIC, 4);
+    public static final Animation scoreboardAnimation = new ScaleAnimation(
+            0.8f, 1.2f, 0.8f, 1.2f,
+            Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f
+    );
+
+    final Game game = Game.of(4);
     TextView scoreboard;
 
     public GameView(Context context) {
@@ -44,7 +54,6 @@ public class GameView extends GridLayout {
                     case MotionEvent.ACTION_DOWN:
                         startX = event.getX();
                         startY = event.getY();
-                        System.out.println("On Action DOWN");
                         break;
                     case MotionEvent.ACTION_UP:
                         double offsetX = event.getX() - startX;
@@ -66,27 +75,18 @@ public class GameView extends GridLayout {
                             action = offsetY < 0 ? Action.UP : Action.DOWN;
                         } finally {
                             if (action != null)
-                                try {
-                                    game.pushAction(action, score -> {
-                                        var sum = score + Integer.parseInt(scoreboard.getText().toString());
-                                        if (sum > 999999)
-                                            sum = 999999;
-                                        else if (sum > 99999)
-                                            scoreboard.setTextSize(20);
-                                        else if (sum > 9999)
-                                            scoreboard.setTextSize(25);
-                                        scoreboard.setText(String.valueOf(sum));
-                                        if (score > 0)
-                                            scoreboard.startAnimation(new ScaleAnimation(
-                                                0.8f, 1.2f, 0.8f, 1.2f,
-                                                Animation.RELATIVE_TO_SELF, 0.5f,
-                                                Animation.RELATIVE_TO_SELF, 0.5f
-                                            ));
-                                    });
-                                } catch (GameShouldStopException ignored) {
-                                    gameStop();
-                                }
-                            System.out.println(action);
+                                game.pushAction(action, score -> {
+                                    var sum = score + Integer.parseInt(scoreboard.getText().toString());
+                                    if (sum > 999999)
+                                        sum = 999999;
+                                    else if (sum > 99999)
+                                        scoreboard.setTextSize(20);
+                                    else if (sum > 9999)
+                                        scoreboard.setTextSize(25);
+                                    scoreboard.setText(String.valueOf(sum));
+                                    if (score > 0)
+                                        scoreboard.startAnimation(scoreboardAnimation);
+                                });
                         }
                         view.performClick();
                         break;
@@ -94,18 +94,20 @@ public class GameView extends GridLayout {
                 return true;
             }
         });
-    }
-
-    private void gameStop() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Game 2048")
-                .setMessage("Game End.\nYour score is " + scoreboard.getText())
-                .setPositiveButton("Restart Game", (dialog, which) -> {
-                    game.initialize();
-                    clearScoreBoard();
-                })
-                .setNegativeButton("Back to Menu (Not implemented)", (dialog, which) -> {});
-        builder.create().show();
+        game.setGameStopHandler(() -> ((Activity) getContext()).runOnUiThread(() -> {
+            if (game.getMode() == Mode.SPEED)
+                game.speedGameEngine.pause();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Game 2048")
+                    .setMessage("Game End.\nYour score is " + scoreboard.getText())
+                    .setPositiveButton("Restart Game", (dialog, which) -> {
+                        game.initialize();
+                        clearScoreBoard();
+                    })
+                    .setNegativeButton("Go To Menu", (dialog, which) ->
+                            ((MainActivity) getContext()).goMenu(this));
+            builder.create().show();
+        }));
     }
 
     public void setScoreboard(@NonNull TextView scoreboard) {

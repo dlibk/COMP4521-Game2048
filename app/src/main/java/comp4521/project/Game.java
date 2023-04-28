@@ -3,12 +3,10 @@ package comp4521.project;
 import androidx.annotation.NonNull;
 
 import java.util.List;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import java.util.logging.Handler;
 import java.util.stream.Collectors;
 
 import comp4521.project.utils.GameShouldStopException;
@@ -17,17 +15,24 @@ import comp4521.project.utils.ShouldNotReachException;
 public class Game {
     interface GameEngine {
         void pushAction(@NonNull Action action, @NonNull Consumer<Integer> updateScore);
+        default void pause() {}
+    }
+
+    interface GameStopHandler {
+        void onGameStop();
     }
     public static final Supplier<Integer> classicSeed = () -> Math.random() < 0.6 ? 2 : 4;
     public static final Supplier<Integer> seedWithZero = () -> Math.random() < 0.1 ? 0 : classicSeed.get();
     private final GameMap gameMap;
     private Supplier<Integer> generator;
-
     private GameEngine gameEngine;
+    private GameStopHandler gameStopHandler;
+    private Mode mode;
 
     private Game(@NonNull Mode mode, int length, Supplier<Integer> generator) {
         this.gameMap = new GameMap(length);
         this.generator = generator;
+        this.mode = mode;
         setGameEngine(mode);
     }
 
@@ -36,32 +41,31 @@ public class Game {
             case CLASSIC: case ZERO:
                 gameEngine = classicGameEngine;
                 break;
+            case SPEED:
+                gameEngine = speedGameEngine;
+                break;
             default:
                 throw new ShouldNotReachException();
         }
+    }
+
+    public void setGameStopHandler(@NonNull GameStopHandler gameStopHandler) {
+        this.gameStopHandler = gameStopHandler;
     }
 
     public void switchMode(@NonNull Mode mode) {
-        switch (mode) {
-            case CLASSIC:
-                gameEngine = classicGameEngine;
-                generator = classicSeed;
-                break;
-            case ZERO:
-                gameEngine = classicGameEngine;
-                generator = seedWithZero;
-                break;
-            case SPEED:
-                gameEngine = speedGameEngine;
-                generator = classicSeed;
-                break;
-            default:
-                throw new ShouldNotReachException();
-        }
+        this.mode = mode;
+        setGameEngine(mode);
+        generator = mode == Mode.ZERO ? seedWithZero : classicSeed;
         initialize();
     }
 
+    public Mode getMode() {
+        return mode;
+    }
+
     public void initialize() {
+        speedGameEngine.pause();
         synchronized (gameMap) {
             gameMap.initialize();
             gameMap.generateCell(generator);
@@ -75,56 +79,59 @@ public class Game {
                 .collect(Collectors.toList());
     }
 
-    public void pushAction(@NonNull Action action, @NonNull Consumer<Integer> updateScore) throws GameShouldStopException {
+    public void pushAction(@NonNull Action action, @NonNull Consumer<Integer> updateScore) {
         gameEngine.pushAction(action, updateScore);
-        if (shouldStop())
-            throw new GameShouldStopException();
-    }
-
-    public boolean shouldStop() {
-        if (!gameMap.getEmptyPositions().isEmpty())
-            return false;
-
-        for (Position p: gameMap.getAllPositions()) {
-            if (gameMap.isMovable(p))
-                return false;
-        }
-        return true;
     }
 
     @NonNull
-    public static Game createGame(@NonNull Mode mode, int length) {
-        switch (mode) {
-            case CLASSIC:
-                return new Game(Mode.CLASSIC, length, classicSeed);
-            case ZERO:
-                return new Game(Mode.CLASSIC, length, seedWithZero);
-            case SPEED:
-                return new Game(Mode.SPEED, length, classicSeed);
+    public static Game of(int length) {
+        switch (length) {
+            case 4:
+                return game4;
+            case 5:
+                return game5;
+            case 6:
+                return game6;
             default:
                 throw new ShouldNotReachException();
         }
     }
 
+    private static final Game game4 = new Game(Mode.CLASSIC, 4, classicSeed);
+    private static final Game game5 = new Game(Mode.CLASSIC, 5, classicSeed);
+    private static final Game game6 = new Game(Mode.CLASSIC, 6, classicSeed);
 
 
     public final GameEngine classicGameEngine = new GameEngine() {
+        private boolean ShouldStop() {
+            if (!gameMap.getEmptyPositions().isEmpty())
+                return false;
+            for (Position p: gameMap.getAllPositions()) {
+                if (gameMap.isMovable(p))
+                    return false;
+            }
+            return true;
+        }
         @Override
         public void pushAction(@NonNull Action action, @NonNull Consumer<Integer> updateScore) {
             synchronized (gameMap) {
                 var score = gameMap.processAction(action);
                 if (score >= 0) {
                     updateScore.accept(score);
-                    gameMap.generateCell(generator);
+                    try {
+                        gameMap.generateCell(generator);
+                        if (ShouldStop())
+                            throw new GameShouldStopException();
+                    } catch (GameShouldStopException ignored) {
+                        gameStopHandler.onGameStop();
+                    }
                 }
-                if (shouldStop())
-                    throw new GameShouldStopException();
             }
         }
     };
 
     public final GameEngine speedGameEngine = new GameEngine() {
-        private final Timer timer = new Timer();
+        private ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
         private boolean started = false;
         @Override
         public void pushAction(@NonNull Action action, @NonNull Consumer<Integer> updateScore) {
@@ -137,69 +144,26 @@ public class Game {
 
             if (!started) {
                 started = true;
-            }
-
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    try {
-                        gameMap.generateCell(generator);
-                    } catch (GameShouldStopException ignored) {
-                        timer.cancel();
-                        started = false;
+                if (executor.isShutdown())
+                    executor = new ScheduledThreadPoolExecutor(2);
+                executor.scheduleAtFixedRate(() -> {
+                    synchronized (gameMap) {
+                        try {
+                            gameMap.generateCell(generator);
+                        } catch (GameShouldStopException ignored) {
+                            executor.shutdown();
+                            gameStopHandler.onGameStop();
+                            started = false;
+                        }
                     }
-                }
-            }, 5000, 5000);
+                }, 0, 2, TimeUnit.SECONDS);
+            }
+        }
+
+        @Override
+        public void pause() {
+            executor.shutdown();
+            started = false;
         }
     };
-
-
-
-    @Deprecated
-    public void render() {
-        for (int row = 0; row < gameMap.getLength(); row++) {
-            for (int col = 0; col < gameMap.getLength(); col++) {
-                var value = gameMap.getCell(Position.of(row, col)).getValue();
-                if (value < 0)
-                    System.out.print(".\t");
-                else
-                    System.out.print(value + "\t");
-            }
-            System.out.println();
-        }
-    }
-
-    public static void main(String[] args) {
-        Game game = Game.createGame(Mode.CLASSIC, 2);
-        game.initialize();
-        game.render();
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.print("Action: ");
-            String cmd = scanner.nextLine();
-            try {
-                switch (cmd) {
-                    case "exit":
-                        return;
-                    case "w":
-                        game.pushAction(Action.UP, (score) -> {});
-                        break;
-                    case "a":
-                        game.pushAction(Action.LEFT, (score) -> {});
-                        break;
-                    case "s":
-                        game.pushAction(Action.DOWN, (score) -> {});
-                        break;
-                    case "d":
-                        game.pushAction(Action.RIGHT, (score) -> {});
-                        break;
-                }
-                game.render();
-            } catch (GameShouldStopException ignored) {
-                game.render();
-                System.out.println("Game Stop");
-                return;
-            }
-        }
-    }
 }

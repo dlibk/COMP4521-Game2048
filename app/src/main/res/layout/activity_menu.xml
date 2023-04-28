@@ -23,9 +23,8 @@
             app:layout_column="0"
             app:layout_rowSpan="1"
             app:layout_columnSpan="2"
-            app:layout_rowWeight="1"
+            app:layout_rowWeight="0.5"
             app:layout_columnWeight="1"
-            app:contentPadding="20sp"
             app:layout_gravity="fill"
             android:alpha="0.99"
             app:cardCornerRadius="20sp"
@@ -39,7 +38,7 @@
                 android:backgroundTint="@color/orange"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:textSize="50sp"
+                android:textSize="40sp"
                 android:text="@string/menu">
             </TextView>
         </androidx.cardview.widget.CardView>
@@ -60,6 +59,7 @@
             app:cardCornerRadius="20sp"
             app:cardBackgroundColor="@color/semitransparent">
             <TextView
+                android:id="@+id/classic4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
@@ -68,8 +68,8 @@
                 android:backgroundTint="@color/orange"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:textSize="50sp"
-                android:text="@string/back">
+                android:textSize="40sp"
+                android:text="@string/classic_4_4">
             </TextView>
         </androidx.cardview.widget.CardView>
 
@@ -84,8 +84,10 @@
             app:contentPadding="20sp"
             app:layout_gravity="fill"
             app:cardCornerRadius="20sp"
+            android:alpha="0.99"
             app:cardBackgroundColor="@color/semitransparent">
             <TextView
+                android:id="@+id/speed"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
@@ -93,8 +95,8 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:text="@string/app_name">
-
+                android:textSize="30sp"
+                android:text="@string/speed">
             </TextView>
         </androidx.cardview.widget.CardView>
 
@@ -109,8 +111,10 @@
             app:layout_gravity="fill"
             app:contentPadding="20sp"
             app:cardCornerRadius="20sp"
+            android:alpha="0.99"
             app:cardBackgroundColor="@color/semitransparent">
             <TextView
+                android:id="@+id/zero"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
@@ -118,7 +122,8 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:text="@string/_2048">
+                android:textSize="30sp"
+                android:text="@string/zero">
 
             </TextView>
         </androidx.cardview.widget.CardView>
@@ -134,6 +139,7 @@
             app:layout_gravity="fill"
             app:contentPadding="20sp"
             app:cardCornerRadius="20sp"
+            android:alpha="0.99"
             app:cardBackgroundColor="@color/semitransparent">
             <TextView
                 android:layout_width="match_parent"
@@ -159,6 +165,7 @@
             app:layout_gravity="fill"
             app:contentPadding="20sp"
             app:cardCornerRadius="20sp"
+            android:alpha="0.99"
             app:cardBackgroundColor="@color/semitransparent">
             <TextView
                 android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package comp4521.project;
 
+import android.app.Activity;
 import android.view.animation.Animation;
 
 import androidx.annotation.NonNull;
@@ -23,7 +24,7 @@ public class Cell {
 
     public void startAnimation(@NonNull Animation animation) {
         if (card != null)
-            card.startAnimation(animation);
+            ((Activity) card.getContext()).runOnUiThread(() -> card.startAnimation(animation));
     }
 
     public boolean isLocked() {
