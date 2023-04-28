@@ -22,4 +22,6 @@
     <color name="_default">#E1610E</color>
     <color name="orange">#FF9800</color>
     <color name="lightyellow">#FFEB3B</color>
+    <color name="background">#523C7A</color>
+    <color name="BG">#523C7A</color>
 </resources>

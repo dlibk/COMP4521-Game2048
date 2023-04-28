@@ -16,7 +16,7 @@ import comp4521.project.utils.GameShouldStopException;
 
 public class GameView extends GridLayout {
 
-    Game game = Game.createGame(Mode.ZERO, 4);
+    Game game = Game.createGame(Mode.CLASSIC, 4);
     TextView scoreboard;
 
     public GameView(Context context) {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#523C7A"
+    android:background="@color/BG"
     tools:context=".MainActivity">
 
     <comp4521.project.GameView
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:alignmentMode="alignBounds"
-        android:background="#523C7A"
+        android:background="@color/BG"
         android:columnCount="4"
         android:orientation="horizontal"
         android:rowCount="4"

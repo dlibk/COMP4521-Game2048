@@ -3,7 +3,7 @@
     <string name="_2048">2048</string>
     <string name="reset">reset</string>
     <string name="back">back</string>
-    <string name="menu">menu</string>
+    <string name="menu">MENU</string>
     <string name="score">Score</string>
     <string name="_0">0</string>
 </resources>
