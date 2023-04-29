@@ -186,26 +186,26 @@ public class Game {
                         gameStopHandler.onGameStop();
                     }
                 }
+            }
 
-                if (!started) {
-                    started = true;
-                    if (executor.isShutdown())
-                        executor = new ScheduledThreadPoolExecutor(2);
-                    executor.scheduleAtFixedRate(() -> {
-                        synchronized (gameMap) {
-                            FreezableCell cell;
-                            if (frozenPosition != null) {
-                                cell = (FreezableCell) gameMap.getCell(frozenPosition);
-                                cell.unfreeze();
-                            }
-                            frozenPosition = gameMap.getAllPositions().get(
-                                    (int) (Math.random() * gameMap.getAllPositions().size())
-                            );
+            if (!started) {
+                started = true;
+                if (executor.isShutdown())
+                    executor = new ScheduledThreadPoolExecutor(2);
+                executor.scheduleAtFixedRate(() -> {
+                    synchronized (gameMap) {
+                        FreezableCell cell;
+                        if (frozenPosition != null) {
                             cell = (FreezableCell) gameMap.getCell(frozenPosition);
-                            cell.freeze();
+                            cell.unfreeze();
                         }
-                    }, 0, 4, TimeUnit.SECONDS);
-                }
+                        frozenPosition = gameMap.getAllPositions().get(
+                                (int) (Math.random() * gameMap.getAllPositions().size())
+                        );
+                        cell = (FreezableCell) gameMap.getCell(frozenPosition);
+                        cell.freeze();
+                    }
+                }, 2, 4, TimeUnit.SECONDS);
             }
         }
 

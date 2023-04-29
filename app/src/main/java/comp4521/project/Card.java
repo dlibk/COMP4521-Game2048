@@ -100,19 +100,17 @@ public class Card extends CardView {
         });
     }
 
-    public void unfreeze() {
+    public void unfreeze(int value) {
         Context context = getContext();
         ((Activity) context).runOnUiThread(() -> {
             if (textView == null)
                 textView = (TextView) getChildAt(0);
             textView.setTextColor(getResources().getColor(R.color.white, context.getTheme()));
-            String txt = textView.getText().toString();
-            if (txt.isEmpty()) {
+            if (value < 0) {
                 startAnimation(disappearAnimation);
                 textView.setVisibility(GONE);
                 setCardBackgroundColor(getResources().getColor(R.color.semitransparent, context.getTheme()));
             } else {
-                int value = Integer.parseInt(txt);
                 setCardBackgroundColor(getColorFromResource(value));
                 textView.setVisibility(VISIBLE);
                 startAnimation(appearAnimation);

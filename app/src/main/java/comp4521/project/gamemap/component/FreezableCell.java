@@ -1,6 +1,5 @@
 package comp4521.project.gamemap.component;
 
-import comp4521.project.gamemap.component.Cell;
 
 public class FreezableCell extends Cell {
     private boolean frozen = false;
@@ -20,15 +19,15 @@ public class FreezableCell extends Cell {
         return frozen ? Integer.MAX_VALUE : super.getValue();
     }
 
-    public void freeze() {
+    public synchronized void freeze() {
         frozen = true;
         if (card != null)
             card.freeze();
     }
 
-    public void unfreeze() {
+    public synchronized void unfreeze() {
         frozen = false;
         if (card != null)
-            card.unfreeze();
+            card.unfreeze(getValue());
     }
 }
