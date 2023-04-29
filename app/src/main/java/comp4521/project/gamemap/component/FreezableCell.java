@@ -1,4 +1,6 @@
-package comp4521.project;
+package comp4521.project.gamemap.component;
+
+import comp4521.project.gamemap.component.Cell;
 
 public class FreezableCell extends Cell {
     private boolean frozen = false;

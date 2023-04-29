@@ -1,9 +1,11 @@
-package comp4521.project;
+package comp4521.project.gamemap.component;
 
 import android.app.Activity;
 import android.view.animation.Animation;
 
 import androidx.annotation.NonNull;
+
+import comp4521.project.Card;
 
 public class Cell {
 

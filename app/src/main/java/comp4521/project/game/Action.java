@@ -1,7 +1,8 @@
-package comp4521.project;
+package comp4521.project.game;
 
 import org.jetbrains.annotations.NotNull;
 
+import comp4521.project.gamemap.position.Position;
 import comp4521.project.utils.ShouldNotReachException;
 
 public enum Action {

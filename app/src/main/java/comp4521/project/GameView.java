@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import comp4521.project.game.*;
+
 public class GameView extends GridLayout {
 
     public static final Animation scoreboardAnimation = new ScaleAnimation(

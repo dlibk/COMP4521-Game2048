@@ -1,13 +1,18 @@
-package comp4521.project;
+package comp4521.project.gamemap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import comp4521.project.game.Action;
+import comp4521.project.Card;
+import comp4521.project.gamemap.component.Cell;
+import comp4521.project.gamemap.component.FreezableCell;
+import comp4521.project.gamemap.position.Move;
+import comp4521.project.gamemap.position.Position;
 import comp4521.project.utils.*;
 
 public class GameMap {

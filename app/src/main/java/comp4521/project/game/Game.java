@@ -1,4 +1,4 @@
-package comp4521.project;
+package comp4521.project.game;
 
 import androidx.annotation.NonNull;
 
@@ -9,18 +9,14 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import comp4521.project.gamemap.component.Cell;
+import comp4521.project.gamemap.component.FreezableCell;
+import comp4521.project.gamemap.GameMap;
+import comp4521.project.gamemap.position.Position;
 import comp4521.project.utils.GameShouldStopException;
 import comp4521.project.utils.ShouldNotReachException;
 
 public class Game {
-    interface GameEngine {
-        void pushAction(@NonNull Action action, @NonNull Consumer<Integer> updateScore);
-        default void pause() {}
-    }
-
-    interface GameStopHandler {
-        void onGameStop();
-    }
     public static final Supplier<Integer> classicSeed = () -> Math.random() < 0.6 ? 2 : 4;
     public static final Supplier<Integer> seedWithZero = () -> Math.random() < 0.1 ? 0 : classicSeed.get();
     private final GameMap gameMap;

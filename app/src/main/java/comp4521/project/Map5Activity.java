@@ -2,9 +2,10 @@ package comp4521.project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import comp4521.project.game.Game;
 
 public class Map5Activity extends AppCompatActivity {
 

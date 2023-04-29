@@ -1,4 +1,4 @@
-package comp4521.project;
+package comp4521.project.gamemap.position;
 
 import androidx.annotation.NonNull;
 

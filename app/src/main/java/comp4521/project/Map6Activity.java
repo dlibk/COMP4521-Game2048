@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import comp4521.project.game.Game;
+
 public class Map6Activity extends AppCompatActivity {
 
     GameView gameView;
