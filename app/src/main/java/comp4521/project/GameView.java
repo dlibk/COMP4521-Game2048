@@ -13,11 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import java.util.EventListener;
-import java.util.function.Consumer;
-
-import comp4521.project.utils.GameShouldStopException;
-
 public class GameView extends GridLayout {
 
     public static final Animation scoreboardAnimation = new ScaleAnimation(
@@ -26,8 +21,8 @@ public class GameView extends GridLayout {
             Animation.RELATIVE_TO_SELF, 0.5f
     );
 
-    final Game game = Game.of(4);
-    TextView scoreboard;
+    protected Game game;
+    protected TextView scoreboard;
 
     public GameView(Context context) {
         super(context);
@@ -45,6 +40,7 @@ public class GameView extends GridLayout {
     }
 
     public void initView() {
+        game = Game.of(getColumnCount());
         setOnTouchListener(new OnTouchListener() {
             private double startX, startY;
             @Override
@@ -94,20 +90,21 @@ public class GameView extends GridLayout {
                 return true;
             }
         });
-        game.setGameStopHandler(() -> ((Activity) getContext()).runOnUiThread(() -> {
-            if (game.getMode() == Mode.SPEED)
-                game.speedGameEngine.pause();
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Game 2048")
-                    .setMessage("Game End.\nYour score is " + scoreboard.getText())
-                    .setPositiveButton("Restart Game", (dialog, which) -> {
-                        game.initialize();
-                        clearScoreBoard();
-                    })
-                    .setNegativeButton("Go To Menu", (dialog, which) ->
-                            ((MainActivity) getContext()).goMenu(this));
-            builder.create().show();
-        }));
+        game.setGameStopHandler(() -> {
+            game.engine().pause();
+            ((Activity) getContext()).runOnUiThread(() -> {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Game 2048")
+                        .setMessage("Game End.\nYour score is " + scoreboard.getText())
+                        .setPositiveButton("Restart Game", (dialog, which) -> {
+                            game.initialize();
+                            clearScoreBoard();
+                        })
+                        .setNegativeButton("Go To Menu", (dialog, which) ->
+                                ((MainActivity) getContext()).goMenu(this));
+                builder.create().show();
+            });
+        });
     }
 
     public void setScoreboard(@NonNull TextView scoreboard) {

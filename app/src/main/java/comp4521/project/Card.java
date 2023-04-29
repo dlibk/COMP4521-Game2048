@@ -3,6 +3,7 @@ package comp4521.project;
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,12 +63,8 @@ public class Card extends CardView {
     public Card(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-    public TextView textView = null;
 
-    public void initialize() {
-        assert getChildCount() > 0;
-        textView = (TextView) getChildAt(0);
-    }
+    private TextView textView = null;
 
     private int getColorFromResource(int value) {
         int id = Objects.requireNonNull(Card.colorSource.getOrDefault(value, R.color._default));
@@ -73,16 +72,12 @@ public class Card extends CardView {
     }
 
     public void setValue(int value) {
-        Activity activity = (Activity) getContext();
-        activity.runOnUiThread(() -> {
+        ((Activity) getContext()).runOnUiThread(() -> {
+            if (textView == null)
+                textView = (TextView) getChildAt(0);
             if (value >= 0) {
                 textView.setText(String.valueOf(value));
-
-                if (value >= 1000) {
-                    textView.setTextSize(30);
-                } else {
-                    textView.setTextSize(45);
-                }
+                textView.setTextSize(getAppropriateTextSize(value));
                 setCardBackgroundColor(getColorFromResource(value));
                 textView.setVisibility(VISIBLE);
                 startAnimation(appearAnimation);
@@ -92,5 +87,59 @@ public class Card extends CardView {
                 setCardBackgroundColor(getResources().getColor(R.color.semitransparent, getContext().getTheme()));
             }
         });
+    }
+
+    public void freeze() {
+        Context context = getContext();
+        ((Activity) context).runOnUiThread(() -> {
+            if (textView == null)
+                textView = (TextView) getChildAt(0);
+            setCardBackgroundColor(getResources().getColor(R.color.gray_400, context.getTheme()));
+            textView.setTextColor(getResources().getColor(R.color.black, context.getTheme()));
+            startAnimation(appearAnimation);
+        });
+    }
+
+    public void unfreeze() {
+        Context context = getContext();
+        ((Activity) context).runOnUiThread(() -> {
+            if (textView == null)
+                textView = (TextView) getChildAt(0);
+            textView.setTextColor(getResources().getColor(R.color.white, context.getTheme()));
+            String txt = textView.getText().toString();
+            if (txt.isEmpty()) {
+                startAnimation(disappearAnimation);
+                textView.setVisibility(GONE);
+                setCardBackgroundColor(getResources().getColor(R.color.semitransparent, context.getTheme()));
+            } else {
+                int value = Integer.parseInt(txt);
+                setCardBackgroundColor(getColorFromResource(value));
+                textView.setVisibility(VISIBLE);
+                startAnimation(appearAnimation);
+            }
+        });
+    }
+
+    private int getAppropriateTextSize(int value) {
+        Context context = getContext();
+        if (context instanceof MainActivity) {
+            return value >= 1000 ? 30 : 45;
+        } else if (context instanceof Map5Activity) {
+            if (value < 100)
+                return 45;
+            else if (value >= 1000)
+                return 25;
+            else
+                return 30;
+        } else if (context instanceof Map6Activity) {
+            if (value < 100)
+                return 40;
+            else if (value >= 1000)
+                return 20;
+            else
+                return 25;
+        } else {
+            return 45;
+        }
     }
 }

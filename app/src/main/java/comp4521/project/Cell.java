@@ -6,10 +6,10 @@ import android.view.animation.Animation;
 import androidx.annotation.NonNull;
 
 public class Cell {
+
     private int value = -1;
     private boolean locked = false;
-
-    private Card card;
+    protected Card card;
     public int getValue() {
         return value;
     }
@@ -47,4 +47,27 @@ public class Cell {
     public void bindCard(@NonNull Card card) {
         this.card = card;
     }
+
+    public static final Cell lockedCell = new Cell() {
+        @Override
+        public int getValue() {
+            return Integer.MAX_VALUE;
+        }
+        @Override
+        public boolean isLocked() {
+            return true;
+        }
+        @Override
+        public boolean isEmpty() {
+            return false;
+        }
+        @Override
+        public void setValue(int value) {}
+        @Override
+        public void lock() {}
+        @Override
+        public void unlock() {}
+        @Override
+        public void startAnimation(@NonNull Animation animation) {}
+    };
 }

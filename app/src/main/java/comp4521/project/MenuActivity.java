@@ -8,10 +8,14 @@ import android.view.View;
 
 public class MenuActivity extends AppCompatActivity {
 
+    Intent intent5, intent6;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        intent5 = new Intent(this, Map5Activity.class);
+        intent6 = new Intent(this, Map6Activity.class);
         setButtons();
     }
 
@@ -36,5 +40,9 @@ public class MenuActivity extends AppCompatActivity {
             setResult(RESULT_OK, intent);
             finish();
         });
+
+        findViewById(R.id.classic5).setOnClickListener(v -> startActivity(intent5));
+
+        findViewById(R.id.classic6).setOnClickListener(v -> startActivity(intent6));
     }
 }

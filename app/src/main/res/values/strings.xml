@@ -6,7 +6,9 @@
     <string name="menu">MENU</string>
     <string name="score">Score</string>
     <string name="_0">0</string>
-    <string name="classic_4_4">CLASSIC 4*4</string>
+    <string name="classic_4_4">Classic 4*4</string>
     <string name="speed">Speed</string>
     <string name="zero">Zero</string>
+    <string name="classic_5">Classic 5*5</string>
+    <string name="classic_6">Classic 6*6</string>
 </resources>

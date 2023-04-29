@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/BG"
-    tools:context=".MainActivity">
+    tools:context=".Map5Activity">
 
     <comp4521.project.GameView
         android:id="@+id/gameView"
@@ -13,9 +13,9 @@
         android:layout_height="0dp"
         android:alignmentMode="alignBounds"
         android:background="@color/BG"
-        android:columnCount="4"
+        android:columnCount="5"
         android:orientation="horizontal"
-        android:rowCount="4"
+        android:rowCount="5"
         android:useDefaultMargins="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
@@ -26,7 +26,6 @@
         app:layout_constraintVertical_bias="0.728">
 
         <comp4521.project.Card
-            android:id="@+id/card00"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
@@ -58,7 +57,6 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card01"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
@@ -86,7 +84,6 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card02"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
@@ -114,7 +111,6 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card03"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
@@ -142,7 +138,33 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card10"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="4"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:alpha="0.99"
+            app:cardBackgroundColor="@color/semitransparent"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold"
+                android:visibility="gone">
+
+            </TextView>
+        </comp4521.project.Card>
+
+        <comp4521.project.Card
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="1"
@@ -170,7 +192,6 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card11"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="1"
@@ -198,7 +219,6 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card12"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="1"
@@ -226,7 +246,6 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card13"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="1"
@@ -254,7 +273,33 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card20"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:layout_column="4"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:alpha="0.99"
+            app:cardBackgroundColor="@color/semitransparent"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold"
+                android:visibility="gone">
+
+            </TextView>
+        </comp4521.project.Card>
+
+        <comp4521.project.Card
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="2"
@@ -282,7 +327,6 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card21"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="2"
@@ -310,7 +354,6 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card22"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="2"
@@ -319,6 +362,7 @@
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:alpha="0.99"
+            android:visibility="invisible"
             app:cardBackgroundColor="@color/semitransparent"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp">
@@ -338,7 +382,6 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card23"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="2"
@@ -366,7 +409,33 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card30"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="2"
+            android:layout_rowWeight="1"
+            android:layout_column="4"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:alpha="0.99"
+            app:cardBackgroundColor="@color/semitransparent"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold"
+                android:visibility="gone">
+
+            </TextView>
+        </comp4521.project.Card>
+
+        <comp4521.project.Card
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="3"
@@ -394,7 +463,6 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card31"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="3"
@@ -422,7 +490,6 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card32"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="3"
@@ -450,7 +517,6 @@
         </comp4521.project.Card>
 
         <comp4521.project.Card
-            android:id="@+id/card33"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="3"
@@ -465,6 +531,168 @@
 
             <TextView
                 android:id="@+id/txt33"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold"
+                android:visibility="gone">
+
+            </TextView>
+        </comp4521.project.Card>
+
+        <comp4521.project.Card
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="3"
+            android:layout_rowWeight="1"
+            android:layout_column="4"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:alpha="0.99"
+            app:cardBackgroundColor="@color/semitransparent"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold"
+                android:visibility="gone">
+
+            </TextView>
+        </comp4521.project.Card>
+
+        <comp4521.project.Card
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="4"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:alpha="0.99"
+            app:cardBackgroundColor="@color/semitransparent"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold"
+                android:visibility="gone">
+
+            </TextView>
+        </comp4521.project.Card>
+
+        <comp4521.project.Card
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="4"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:alpha="0.99"
+            app:cardBackgroundColor="@color/semitransparent"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold"
+                android:visibility="gone">
+
+            </TextView>
+        </comp4521.project.Card>
+
+        <comp4521.project.Card
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="4"
+            android:layout_rowWeight="1"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:alpha="0.99"
+            app:cardBackgroundColor="@color/semitransparent"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold"
+                android:visibility="gone">
+
+            </TextView>
+        </comp4521.project.Card>
+
+        <comp4521.project.Card
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="4"
+            android:layout_rowWeight="1"
+            android:layout_column="3"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:alpha="0.99"
+            app:cardBackgroundColor="@color/semitransparent"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="45sp"
+                android:textStyle="bold"
+                android:visibility="gone">
+
+            </TextView>
+        </comp4521.project.Card>
+
+        <comp4521.project.Card
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="4"
+            android:layout_rowWeight="1"
+            android:layout_column="4"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:alpha="0.99"
+            app:cardBackgroundColor="@color/semitransparent"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp">
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -552,7 +780,7 @@
             app:cardBackgroundColor="@color/_default"
             app:cardCornerRadius="20dp"
             app:cardElevation="5dp"
-            app:layout_constraintDimensionRatio="1:1">
+            app:layout_constraintDimensionRatio="h,1:1">
 
             <TextView
                 android:layout_width="match_parent"

@@ -14,18 +14,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     GameView gameView;
-    Game game = Game.of(4);
+    Game game;
     ActivityResultLauncher<Intent> launcher;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         gameView = findViewById(R.id.gameView);
+        game = gameView.game;
         launcher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
-                        // There are no request codes
                         Intent data = result.getData();
                         if (data == null)
                             return;
@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         var cellList = game.getCellList();
         for (int i = 0; i < gameView.getChildCount(); i++) {
             Card card = (Card) gameView.getChildAt(i);
-            card.initialize();
             cellList.get(i).bindCard(card);
         }
         gameView.setScoreboard(findViewById(R.id.scoreboard));
@@ -57,14 +56,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void goMenu(View v) {
         Intent intent = new Intent(this, MenuActivity.class);
-        if (game.getMode() == Mode.SPEED)
-            game.speedGameEngine.pause();
+        game.engine().pause();
         launcher.launch(intent);
     }
 
     @Override
     public void onBackPressed() {
-        if (game.getMode() == Mode.SPEED)
-            game.speedGameEngine.pause();
+        game.engine().pause();
     }
 }
