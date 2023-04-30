@@ -18,7 +18,7 @@ import comp4521.project.game.*;
 public class GameView extends GridLayout {
 
     public static final Animation scoreboardAnimation = new ScaleAnimation(
-            0.8f, 1.2f, 0.8f, 1.2f,
+            0.8f, 1.2f, 0.9f, 1.0f,
             Animation.RELATIVE_TO_SELF, 0.5f,
             Animation.RELATIVE_TO_SELF, 0.5f
     );
@@ -57,7 +57,7 @@ public class GameView extends GridLayout {
                         double offsetX = event.getX() - startX;
                         double offsetY = event.getY() - startY;
 
-                        if (Math.sqrt(offsetX * offsetX + offsetY * offsetY) <= 10) {
+                        if (Math.sqrt(offsetX * offsetX + offsetY * offsetY) <= 20) {
                             return false;
                         }
                         Action action = null;
@@ -77,13 +77,12 @@ public class GameView extends GridLayout {
                                     var sum = score + Integer.parseInt(scoreboard.getText().toString());
                                     if (sum > 999999)
                                         sum = 999999;
-                                    else if (sum > 99999)
-                                        scoreboard.setTextSize(20);
                                     else if (sum > 9999)
-                                        scoreboard.setTextSize(25);
+                                        scoreboard.setTextSize(30);
                                     scoreboard.setText(String.valueOf(sum));
                                     if (score > 0)
-                                        scoreboard.startAnimation(scoreboardAnimation);
+                                        ((View) scoreboard.getParent().getParent())
+                                                .startAnimation(scoreboardAnimation);
                                 });
                         }
                         view.performClick();

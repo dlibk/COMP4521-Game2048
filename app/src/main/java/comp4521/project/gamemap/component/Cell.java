@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 
 import comp4521.project.Card;
 
-public class Cell {
+public class Cell implements Freezable {
 
     private int value = -1;
     private boolean locked = false;

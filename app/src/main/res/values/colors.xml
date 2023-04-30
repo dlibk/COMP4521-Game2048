@@ -23,6 +23,6 @@
     <color name="_256">#F35506</color>
     <color name="_default">#E1610E</color>
     <color name="orange">#FF9800</color>
-    <color name="lightyellow">#FFEB3B</color>
+    <color name="light_yellow">#FFEB3B</color>
     <color name="BG">#523C7A</color>
 </resources>

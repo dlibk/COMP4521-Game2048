@@ -162,7 +162,7 @@ public class Game {
     public final GameEngine freezingGameEngine = new GameEngine() {
         private boolean started = false;
         private ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
-        private Position frozenPosition;
+        private Position frozenPosition1, frozenPosition2;
         private boolean ShouldStop() {
             if (!gameMap.getEmptyPositions().isEmpty())
                 return false;
@@ -180,9 +180,11 @@ public class Game {
                     updateScore.accept(score);
                     try {
                         gameMap.generateCell(generator);
+                        gameMap.generateCell(generator);
                         if (ShouldStop())
                             throw new GameShouldStopException();
                     } catch (GameShouldStopException ignored) {
+                        executor.shutdown();
                         gameStopHandler.onGameStop();
                     }
                 }
@@ -194,16 +196,26 @@ public class Game {
                     executor = new ScheduledThreadPoolExecutor(2);
                 executor.scheduleAtFixedRate(() -> {
                     synchronized (gameMap) {
-                        FreezableCell cell;
-                        if (frozenPosition != null) {
-                            cell = (FreezableCell) gameMap.getCell(frozenPosition);
-                            cell.unfreeze();
+                        if (frozenPosition1 != null) {
+                            gameMap.getCell(frozenPosition1).unfreeze();
                         }
-                        frozenPosition = gameMap.getAllPositions().get(
+
+                        if (frozenPosition2 != null && !frozenPosition2.equals(frozenPosition1)) {
+                            gameMap.getCell(frozenPosition2).unfreeze();
+                        }
+
+                        frozenPosition1 = gameMap.getAllPositions().get(
                                 (int) (Math.random() * gameMap.getAllPositions().size())
                         );
-                        cell = (FreezableCell) gameMap.getCell(frozenPosition);
-                        cell.freeze();
+
+                        gameMap.getCell(frozenPosition1).freeze();
+
+                        frozenPosition2 = gameMap.getAllPositions().stream()
+                                .filter(p -> !p.equals(frozenPosition1))
+                                .collect(Collectors.toList())
+                                .get((int) (Math.random() * (gameMap.getAllPositions().size() - 1)));
+
+                        gameMap.getCell(frozenPosition2).freeze();
                     }
                 }, 2, 4, TimeUnit.SECONDS);
             }

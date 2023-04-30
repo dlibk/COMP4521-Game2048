@@ -19,12 +19,14 @@ public class FreezableCell extends Cell {
         return frozen ? Integer.MAX_VALUE : super.getValue();
     }
 
+    @Override
     public synchronized void freeze() {
         frozen = true;
         if (card != null)
             card.freeze();
     }
 
+    @Override
     public synchronized void unfreeze() {
         frozen = false;
         if (card != null)
