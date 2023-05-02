@@ -10,7 +10,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import comp4521.project.gamemap.component.Cell;
-import comp4521.project.gamemap.component.FreezableCell;
 import comp4521.project.gamemap.GameMap;
 import comp4521.project.gamemap.position.Position;
 import comp4521.project.utils.GameShouldStopException;
@@ -25,27 +24,13 @@ public class Game {
     private Mode mode;
     private GameEngine engine;
 
-    private Game(@NonNull Mode mode, int length, Supplier<Integer> generator) {
+    private Game(@NonNull Mode mode, int length) {
         this.gameMap = new GameMap(length);
-        this.generator = generator;
-        this.mode = mode;
-        switch (mode) {
-            case CLASSIC: case ZERO:
-                if (length == 6)
-                    engine = freezingGameEngine;
-                else
-                    engine = classicGameEngine;
-                break;
-            case SPEED:
-                engine = speedGameEngine;
-                break;
-            default:
-                throw new ShouldNotReachException();
-        }
+        switchMode(mode);
     }
 
-    public GameEngine engine() {
-        return engine;
+    public void pause() {
+        engine.pause();
     }
 
     public void setGameStopHandler(@NonNull GameStopHandler gameStopHandler) {
@@ -68,7 +53,6 @@ public class Game {
                 throw new ShouldNotReachException();
         }
         generator = mode == Mode.ZERO ? seedWithZero : classicSeed;
-        initialize();
     }
 
     public Mode getMode() {
@@ -180,7 +164,8 @@ public class Game {
                     updateScore.accept(score);
                     try {
                         gameMap.generateCell(generator);
-                        gameMap.generateCell(generator);
+                        if (!gameMap.getEmptyPositions().isEmpty())
+                            gameMap.generateCell(generator);
                         if (ShouldStop())
                             throw new GameShouldStopException();
                     } catch (GameShouldStopException ignored) {
@@ -242,7 +227,7 @@ public class Game {
         }
     }
 
-    private static final Game game4 = new Game(Mode.CLASSIC, 4, classicSeed);
-    private static final Game game5 = new Game(Mode.CLASSIC, 5, classicSeed);
-    private static final Game game6 = new Game(Mode.CLASSIC, 6, classicSeed);
+    private static final Game game4 = new Game(Mode.CLASSIC, 4);
+    private static final Game game5 = new Game(Mode.CLASSIC, 5);
+    private static final Game game6 = new Game(Mode.CLASSIC, 6);
 }

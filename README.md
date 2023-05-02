@@ -9,6 +9,7 @@
 3. Some images could be added to menu page. However, I didn't find a view to set the background of
    the CardView while keep the background of TextView transparent. And also, I want to keep the
    width/height ratio of images.
+4. Compared with 6\*6 map, perhaps there can be some more creative features in 5\*5 map.
 
 ## Game Introduction
 

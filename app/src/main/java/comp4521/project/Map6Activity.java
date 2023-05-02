@@ -45,13 +45,13 @@ public class Map6Activity extends AppCompatActivity {
     public void goMenu(View v) {
         onButtonClickedPlayer.seekTo(0);
         onButtonClickedPlayer.start();
-        game.engine().pause();
+        game.pause();
         finish();
     }
 
     @Override
     public void onBackPressed() {
-        game.engine().pause();
+        game.pause();
         super.onBackPressed();
     }
 }

@@ -16,33 +16,34 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         intent5 = new Intent(this, Map5Activity.class);
         intent6 = new Intent(this, Map6Activity.class);
-        setButtons();
     }
 
-    public void setButtons() {
-        findViewById(R.id.classic4).setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.putExtra("mode", "classic");
-            setResult(RESULT_OK, intent);
-            finish();
-        });
+    public void goClassic4(View v) {
+        Intent intent = new Intent();
+        intent.putExtra("mode", "classic");
+        setResult(RESULT_OK, intent);
+        finish();
+    }
 
-        findViewById(R.id.speed).setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.putExtra("mode", "speed");
-            setResult(RESULT_OK, intent);
-            finish();
-        });
+    public void goSpeed(View v) {
+        Intent intent = new Intent();
+        intent.putExtra("mode", "speed");
+        setResult(RESULT_OK, intent);
+        finish();
+    }
 
-        findViewById(R.id.zero).setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.putExtra("mode", "zero");
-            setResult(RESULT_OK, intent);
-            finish();
-        });
+    public void goZero(View v) {
+        Intent intent = new Intent();
+        intent.putExtra("mode", "zero");
+        setResult(RESULT_OK, intent);
+        finish();
+    }
 
-        findViewById(R.id.classic5).setOnClickListener(v -> startActivity(intent5));
+    public void goClassic5(View v) {
+        startActivity(intent5);
+    }
 
-        findViewById(R.id.classic6).setOnClickListener(v -> startActivity(intent6));
+    public void goClassic6(View v) {
+        startActivity(intent6);
     }
 }

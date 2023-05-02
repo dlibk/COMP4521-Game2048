@@ -92,8 +92,8 @@ public class GameView extends GridLayout {
             }
         });
         game.setGameStopHandler(() -> {
-            game.engine().pause();
             ((Activity) getContext()).runOnUiThread(() -> {
+                game.pause();
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Game 2048")
                         .setMessage("Game End.\nYour score is " + scoreboard.getText())
@@ -101,8 +101,13 @@ public class GameView extends GridLayout {
                             game.initialize();
                             clearScoreBoard();
                         })
-                        .setNegativeButton("Go To Menu", (dialog, which) ->
-                                ((MainActivity) getContext()).goMenu(this));
+                        .setNegativeButton("Go To Menu", (dialog, which) -> {
+                            var context = getContext();
+                            if (context instanceof MainActivity)
+                                ((MainActivity) context).goMenu(this);
+                            else
+                                ((Activity) context).finish();
+                        });
                 builder.create().show();
             });
         });

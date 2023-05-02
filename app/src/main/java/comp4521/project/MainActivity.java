@@ -8,6 +8,7 @@ import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import comp4521.project.game.Game;
@@ -17,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     GameView gameView;
     Game game;
     ActivityResultLauncher<Intent> launcher;
-
     MediaPlayer onButtonClickedPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                         if (mode != game.getMode()) {
                             game.switchMode(mode);
                             gameView.clearScoreBoard();
+                            game.initialize();
                         }
                     }
                 });
@@ -69,13 +70,13 @@ public class MainActivity extends AppCompatActivity {
         onButtonClickedPlayer.seekTo(0);
         onButtonClickedPlayer.start();
         Intent intent = new Intent(this, MenuActivity.class);
-        game.engine().pause();
+        game.pause();
         launcher.launch(intent);
     }
 
     @Override
     public void onBackPressed() {
-        game.engine().pause();
+        game.pause();
         super.onBackPressed();
     }
 }
