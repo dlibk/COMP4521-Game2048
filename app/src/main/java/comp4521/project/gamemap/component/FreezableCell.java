@@ -30,6 +30,6 @@ public class FreezableCell extends Cell {
     public synchronized void unfreeze() {
         frozen = false;
         if (card != null)
-            card.unfreeze(getValue());
+            card.unfreeze(super.getValue());
     }
 }

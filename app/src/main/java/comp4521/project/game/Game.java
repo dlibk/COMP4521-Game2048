@@ -3,6 +3,7 @@ package comp4521.project.game;
 import androidx.annotation.NonNull;
 
 import java.util.List;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -107,7 +108,8 @@ public class Game {
     };
 
     public final GameEngine speedGameEngine = new GameEngine() {
-        private ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
+        private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
+        private ScheduledFuture<?> future;
         private boolean started = false;
         @Override
         public void pushAction(@NonNull Action action, @NonNull Consumer<Integer> updateScore) {
@@ -120,16 +122,13 @@ public class Game {
 
             if (!started) {
                 started = true;
-                if (executor.isShutdown())
-                    executor = new ScheduledThreadPoolExecutor(2);
-                executor.scheduleAtFixedRate(() -> {
+                future = executor.scheduleAtFixedRate(() -> {
                     synchronized (gameMap) {
                         try {
                             gameMap.generateCell(generator);
                         } catch (GameShouldStopException ignored) {
-                            executor.shutdown();
+                            pause();
                             gameStopHandler.onGameStop();
-                            started = false;
                         }
                     }
                 }, 0, 2, TimeUnit.SECONDS);
@@ -138,14 +137,16 @@ public class Game {
 
         @Override
         public void pause() {
-            executor.shutdown();
+            if (future != null)
+                future.cancel(true);
             started = false;
         }
     };
 
     public final GameEngine freezingGameEngine = new GameEngine() {
         private boolean started = false;
-        private ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
+        private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
+        private ScheduledFuture<?> future;
         private Position frozenPosition1, frozenPosition2;
         private boolean ShouldStop() {
             if (!gameMap.getEmptyPositions().isEmpty())
@@ -169,17 +170,16 @@ public class Game {
                         if (ShouldStop())
                             throw new GameShouldStopException();
                     } catch (GameShouldStopException ignored) {
-                        executor.shutdown();
+                        pause();
                         gameStopHandler.onGameStop();
+                        return;
                     }
                 }
             }
 
             if (!started) {
                 started = true;
-                if (executor.isShutdown())
-                    executor = new ScheduledThreadPoolExecutor(2);
-                executor.scheduleAtFixedRate(() -> {
+                future = executor.scheduleAtFixedRate(() -> {
                     synchronized (gameMap) {
                         if (frozenPosition1 != null) {
                             gameMap.getCell(frozenPosition1).unfreeze();
@@ -208,7 +208,8 @@ public class Game {
 
         @Override
         public void pause() {
-            executor.shutdown();
+            if (future != null)
+                future.cancel(true);
             started = false;
         }
     };
