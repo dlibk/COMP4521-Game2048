@@ -50,7 +50,7 @@ Button `MENU`: Go to the menu page.
 
 ### Menu Page
 
-(img)
+![menupage](./img/menupage.png)
 
 As shown, player can choose to switch to other game mode.
 
@@ -59,6 +59,9 @@ they can continue the game without resetting.
 
 For other games in larger map, unfortunately their progress will lose immediately after entering the
 menu, as they are designed to be challenging modes.
+
+If you are wondering about the relationship among the images and the modes, then I would say there 
+is no relationship, but aren't they cool? :)
 
 ## More Game Modes
 
